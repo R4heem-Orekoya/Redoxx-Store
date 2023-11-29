@@ -13,7 +13,7 @@ const Cartpage = () => {
 
   const pay = async () => {
     try {
-      const response = await fetch('http://localhost:443/checkout', {
+      const response = await fetch('https://redoxx-store.vercel.app/checkout', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

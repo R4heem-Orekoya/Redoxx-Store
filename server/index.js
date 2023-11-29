@@ -10,7 +10,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 app.use(express.json())
 app.use(express.static('public'))
 app.use(cors({
-     origin: 'http://localhost:5173',
+     origin: 'https://redoxx-store-xgtl.vercel.app/',
      methods: ['POST'], // Specify the allowed methods (in this case, only POST)
 }));
 
@@ -38,8 +38,8 @@ app.post('/checkout', async (req, res) => {
                          quantity: item.quantity
                     }
                }),
-               success_url: 'http://localhost:5173/success',
-               cancel_url: 'http://localhost:5173/cancel'
+               success_url: 'https://redoxx-store-xgtl.vercel.app/success',
+               cancel_url: 'https://redoxx-store-xgtl.vercel.app/cancel'
           })
 
           res.send(JSON.stringify({
