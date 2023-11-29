@@ -49,7 +49,3 @@ app.post('/checkout', async (req, res) => {
           res.status(500).json({error: error.message})
      }
 })
-
-app.listen(443, () => {
-     console.log('App is listening on port 443');
-})
