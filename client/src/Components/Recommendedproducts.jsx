@@ -8,7 +8,7 @@ const Recommendedproducts = () => {
      return (
           <div>
                <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold'>
-                    Headphones For You!
+                    Popular Products!
                </h2>
                <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 md:mt-10'>
                     {
