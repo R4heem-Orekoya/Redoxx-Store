@@ -15,15 +15,18 @@ const Productpage = () => {
   const product = products.find(product => product.slug === id)
 
   const [quantity, setQuantity] = useState(() => {
-
-    const storedCount = localStorage.getItem(`count_${product?.slug}`);
+    const storedCount = product?.slug ? localStorage.getItem(`count_${product.slug}`) : null;
     return storedCount ? parseInt(storedCount, 10) : 1;
-  })
-
+  });
+  
   useEffect(() => {
-    // Store the count value in local storage whenever it changes
-    localStorage.setItem(`count_${product?.slug}`, quantity.toString());
+    // Ensure product and product.slug exist before using them
+    if (product?.slug) {
+      localStorage.setItem(`count_${product.slug}`, quantity.toString());
+    }
   }, [quantity, product?.slug]);
+  
+  
 
 
   if (!product) {
@@ -62,8 +65,11 @@ const Productpage = () => {
                 <button 
                   onClick={() => {
                     setQuantity(prev => {
-                      if (prev === 1) return prev
-                      prev - 1
+                      if (prev === 1){
+                        return prev
+                      }else{
+                        return prev - 1
+                      }
                     })
                   }}>
                     <Minus size={20} strokeWidth={3}/>

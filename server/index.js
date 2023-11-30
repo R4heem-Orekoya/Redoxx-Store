@@ -14,7 +14,12 @@ app.use(cors({
      methods: ['POST'], // Specify the allowed methods (in this case, only POST)
 }));
 
-app.post('/checkout', async (req, res) => {
+app.post('/checkout', async (req, res, next) => {
+     res.setHeader('Access-Control-Allow-Origin', 'https://redoxx-store-xgtl.vercel.app');
+     res.setHeader('Access-Control-Allow-Methods', 'POST');
+     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+     res.setHeader('Access-Control-Allow-Credentials', 'true');
+
      try{
           const session = await stripe.checkout.sessions.create({
                billing_address_collection: 'required',
@@ -49,3 +54,7 @@ app.post('/checkout', async (req, res) => {
           res.status(500).json({error: error.message})
      }
 })
+
+app.listen('https://redoxx-store.vercel.app/', () => {
+     console.log('Server is running on https://redoxx-store.vercel.app/');
+});
