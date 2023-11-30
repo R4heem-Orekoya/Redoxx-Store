@@ -10,16 +10,11 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 app.use(express.json())
 app.use(express.static('public'))
 app.use(cors({
-     origin: 'https://redoxx-store-xgtl.vercel.app/',
+     origin: '*',
      methods: ['POST'], // Specify the allowed methods (in this case, only POST)
 }));
 
-app.post('/checkout', async (req, res, next) => {
-     res.setHeader('Access-Control-Allow-Origin', 'https://redoxx-store-xgtl.vercel.app');
-     res.setHeader('Access-Control-Allow-Methods', 'POST');
-     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-     res.setHeader('Access-Control-Allow-Credentials', 'true');
-
+app.post('/checkout', async (req, res) => {
      try{
           const session = await stripe.checkout.sessions.create({
                billing_address_collection: 'required',
@@ -55,6 +50,7 @@ app.post('/checkout', async (req, res, next) => {
      }
 })
 
-app.listen('https://redoxx-store.vercel.app/', () => {
-     console.log('Server is running on https://redoxx-store.vercel.app/');
+const PORT = process.env.PORT || 3000; // Use the environment-provided port or default to 3000
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
